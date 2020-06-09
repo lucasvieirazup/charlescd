@@ -42,7 +42,7 @@ To create this structure, you have to execute the files in a configured cluster,
 ```text
 kubectl create namespace charles
 
-kubectl apply -f file.yaml
+kubectl apply -n charles -f https://raw.githubusercontent.com/ZupIT/charlescd/master/install/helm-chart/single-file.yaml
 ```
 
 At the end of the process, you will have inside of namespace `charles` all the modules of the product, as well your dependencies installed in a simpler way.
