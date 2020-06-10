@@ -12,7 +12,7 @@ The CharlesCD installation considers these components:
 
 1. Seven specific modules of **Charles' architecture;** 
 2. **Keycloak**, used for product authentication and authorization;
-3. A **PostgreSQL database** for backend modules \( `charles-application`, `charles-circle-matcher`, `deploy` and `villager`\) and Keycloak;
+3. A **PostgreSQL database** for back-end modules \( `charles-application`, `charles-circle-matcher`, `deploy` and `villager`\) and Keycloak;
 4. A **Redis**, to be used by [**Circle Matcher**. ](../reference/circle-matcher.md)
 
 ### Continuous Delivery Platform
@@ -45,7 +45,54 @@ kubectl create namespace charles
 kubectl apply -n charles -f https://raw.githubusercontent.com/ZupIT/charlescd/master/install/helm-chart/single-file.yaml
 ```
 
-At the end of the process, you will have inside of namespace `charles` all the modules of the product, as well your dependencies installed in a simpler way.
+At the end of the process, you will have inside of namespace `charles` all the modules of the product, as well your dependencies installed in a simpler way.  
+  
+**How to access the application:**
+
+**Minikube:**
+
+On the minikube, the **load balancer** does not automatically create an **external IP**. So to make this possible, just run:
+
+```text
+minikube tunnel
+// enter your root password, then open another terminal tab and run:
+kubectl get svc -n charles
+// now the nginx IP external appears
+```
+
+Now that you have the **external ip,** **replace the ip-external-charles** and add this line on your host file:  
+[How to change the host file.](https://www.howtogeek.com/howto/27350/beginner-geek-how-to-edit-your-hosts-file/)
+
+```text
+<IP-EXTERNAL-CHARLES>       charles.info.example
+```
+
+**In your browser type http://charles.info.example and the entire application is available.**
+
+\*\*\*\*
+
+**Cloud Provider \(AWS, GCP, AZURE\)**
+
+If you install on a managed kubernetes, the external ip for the nginx load balancer is created automatically, so when all the components are ready just take the external IP with the command below and add it to your hosts file.
+
+```text
+kubectl get svc -n charles
+// get external IP value
+```
+
+Line to add in host file. \([How to change the host file](https://www.howtogeek.com/howto/27350/beginner-geek-how-to-edit-your-hosts-file/).\)
+
+```text
+<IP-EXTERNAL-CHARLES>       charles.info.example
+```
+
+{% hint style="info" %}
+if you want to use this installation in a productive or development environment you will probably expose the application using a DNS.
+
+After doing this, clone the single-file.yaml and change all occurrences from http://charles.info.example to &lt;your-dns&gt;, then execute the install command again.
+
+ `kubectl install -f <single-file-path> -n charles`
+{% endhint %}
 
 {% hint style="danger" %}
 The purpose of this installation is only for tests. Using this for production environment is not recommended due to lack o backup, high availability, etc.
