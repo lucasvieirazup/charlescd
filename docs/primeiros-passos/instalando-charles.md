@@ -46,7 +46,57 @@ kubectl create namespace charles
 kubectl apply -n charles -f https://raw.githubusercontent.com/ZupIT/charlescd/master/install/helm-chart/single-file.yaml
 ```
 
-Ao final do processo, você terá dentro do namespace `charles` todos os módulos do projeto e suas dependências instaladas da forma mais simples possível. No link, você encontra os [**arquivos no nosso repositório**](https://raw.githubusercontent.com/ZupIT/charlescd/master/install/helm-chart/single-file.yaml). 
+Ao final do processo, você terá dentro do namespace `charles` todos os módulos do projeto e suas dependências instaladas da forma mais simples possível. No link, você encontra os [**arquivos no nosso repositório**](https://raw.githubusercontent.com/ZupIT/charlescd/master/install/helm-chart/single-file.yaml).
+
+
+
+ **Como acessar a aplicação:**
+
+**Minikube:**
+
+No minikube, o **load balancer nginx não cria automaticamente um IP externo**, para tornar isso possível, basta executar:
+
+```text
+minikube tunnel
+// digite sua senha root, em uma nova aba do terminal e execute:
+kubectl get svc -n charles
+// agora o IP externo está disponível
+```
+
+Agora que você tem um ip externo, troque o valor &lt;ip-external-charles&gt; pelo IP externo e adicione essa linha no seu arquivo de host do OS.
+
+[Como mudar o host do seu sistema.](https://www.howtogeek.com/howto/27350/beginner-geek-how-to-edit-your-hosts-file/)
+
+```text
+<IP-EXTERNAL-CHARLES>       charles.info.example
+```
+
+No seu navegador digite http://charles.info.example e a aplicação estará disponível.
+
+
+
+**Cloud Provider \(AWS, GCP, AZURE\)**
+
+Se você instalar em um cluster de kubernetes gerenciado, **o ip externo para o load balancer nginx é criado automaticamente**, então quando todos os componentes estiverem prontos consiga o IP externo com o comando:
+
+```text
+kubectl get svc -n charles
+// get external IP value
+```
+
+Linha para adicionar no seu arquivo de host do OS, \([Como mudar o host do seu sistema.](https://www.howtogeek.com/howto/27350/beginner-geek-how-to-edit-your-hosts-file/)\) em casos onde você quer acessar do browser da sua máquina.
+
+```text
+<IP-EXTERNAL-CHARLES>       charles.info.example
+```
+
+{% hint style="info" %}
+Se você quiser usar essa instalação em ambientes de produção ou desenvolvimento deverá expor a aplicação usando um DNS.
+
+Depois de apontar seu DNS para o IP externo, faça o clone do single-file.yam e troque todas as ocorrências de http://charles.info.example para o seu novo DNS, depois rode o comando de instalação novamente.
+
+`kubectl install -f <single-file-path> -n charles`
+{% endhint %}
 
 {% hint style="danger" %}
 Como essa instalação serve **apenas para o uso em ambiente de testes**, não recomendamos esse caso de instalação para ambientes produtivos porque ele não inclui cuidados como: backups do banco de dados, alta disponibilidade, entre outros.
