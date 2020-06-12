@@ -9,13 +9,13 @@ description: >-
 
 ## **Circle Matcher**
 
-Trata-se de um serviço HTTP que permite você identificar a qual segmentação o usuário pertence, a partir de regras lógicas previamente definidas. Para isso, o \***\*\[**Circle Matcher**\]\(referencia/circle-matcher.md\) \*\***recebe na requisição um JSON com os atributos sobre o usuário, e retorna uma lista de círculos.
+Trata-se de um serviço HTTP que permite você identificar a qual segmentação o usuário pertence, a partir de regras lógicas previamente definidas. Para isso, o [**Circle Matcher**](referencia/circle-matcher.md) recebe na requisição um JSON com os atributos sobre o usuário, e retorna uma lista de círculos.
 
 ## **Círculos**
 
-\*\*\*\*[**Círculos** ](referencia/circulos.md)são grupos de usuários criados a partir de características específicas dentro de um mesmo ambiente na plataforma do Charles. Dessa forma, o desenvolvedor pode segmentar os usuários de acordo com as regras \(AND ou OR\) que mais fizerem sentido para testar aquela release.
+[**Círculos** ](referencia/circulos.md)são grupos de usuários criados a partir de características específicas dentro de um mesmo ambiente na plataforma do Charles. Dessa forma, o desenvolvedor pode segmentar os usuários de acordo com as regras \(AND ou OR\) que mais fizerem sentido para testar aquela release.
 
-Por exemplo, é possível [**criar um círculo**](referencia/circulos.md#como-criar-circulos) \*\*\*\*de engenheiros da região Norte do Brasil, outro de engenheiros do sudeste e um terceiro contendo todos os engenheiros brasileiros. Baseado nessa segmentação de clientes, pode-se elaborar diversas lógicas de deploy.
+Por exemplo, é possível [**criar um círculo**](referencia/circulos.md#como-criar-circulos) de engenheiros da região Norte do Brasil, outro de engenheiros do sudeste e um terceiro contendo todos os engenheiros brasileiros. Baseado nessa segmentação de clientes, pode-se elaborar diversas lógicas de deploy.
 
 ## **Componentes**
 
