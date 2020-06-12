@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Overviews](README.md)
+* [Overview](README.md)
 * [Key concepts](key-concepts.md)
 
 ## GET STARTED
