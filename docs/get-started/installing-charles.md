@@ -28,6 +28,10 @@ If you want more information about how to configure Spinnaker or Octopipe, check
 
 ## Main install cases
 
+{% hint style="info" %}
+**At the first access, regardless of the installation method, the default admin user is charlesadmin@zup.com.br and the password is 123mudar.**
+{% endhint %}
+
 ### Case \#1: Quick Installation
 
 This installation is recommended for those who never used Charles before and just want a **first contact in testing environment**, without looking for scalability or security.
@@ -68,8 +72,6 @@ Now that you have the **external ip,** **replace the ip-external-charles** and a
 ```
 
 **In your browser type http://charles.info.example and the entire application is available.**
-
-\*\*\*\*
 
 **Cloud Provider \(AWS, GCP, AZURE\)**
 
