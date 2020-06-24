@@ -4,6 +4,10 @@
 
 ### Istio Configuration
 
+{% hint style="error" %}
+For use telemetry with Charles your istio version should be at version 1.4 or bellow, this happens due to Istio telemetry configuration update from v1 to v2, whose deprecated the mixer use and changed the way requests telemetry were accounted.
+{% endhint %}
+
 Metrics are related to circle requests are quantified and exposed by Istio, so it's necessary to configure it to get information about each circle.
 
 {% hint style="info" %}
@@ -13,10 +17,6 @@ If you want to learn more about Istio's telemetry, check out their [**documentat
 To configure your Istio, it is necessary to enable it, so it will be able to show metrics and then you have to configure to show Charles' metrics.
 
 If your Istio is not enabled to show metrics, follow the next steps:
-
-{% hint style="warning" %}
-The configuration below refers to Istio's 1.5 version.
-{% endhint %}
 
 Create a file named **telemetry.yaml with the following content:**
 
@@ -28,10 +28,7 @@ spec:
     prometheus:
       enabled: false
     telemetry:
-      v1:
         enabled: true
-      v2:
-        enabled: false
 ```
 
 After that, run the command below:

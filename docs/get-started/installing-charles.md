@@ -4,6 +4,10 @@
 The installing process was created considering some use cases, and each of them have its own specific tutorial. If you need to install CharlesCD in a different way, we suggest to check the **custom** section with isolated helm charts.
 {% endhint %}
 
+{% hint style="error" %}
+For Charles complete use, the Istio version installed on your cluster should be at version 1.4 or bellow. If you use a version above that, the Charles telemetry will not work properly due to Istio telemetry configuration update from v1 to v2, whose deprecated the mixer use and changed the way requests telemetry were accounted.
+{% endhint %}
+
 ## Introduction
 
 ### Components
